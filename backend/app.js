@@ -1,9 +1,9 @@
 //Importation d'Express
 const express = require('express');
+const bodyParser = require('body-parser');
 
 //Importation de Mongoose
 const mongoose = require('mongoose');
-
 
 //Importation d'helmet
 const helmet = require('helmet');
@@ -19,7 +19,7 @@ const path = require('path');
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
-mongoose.connect('mongodb+srv://Utilisateurs04:azerty123@cluster0.qmxoz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
