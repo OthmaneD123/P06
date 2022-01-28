@@ -7,6 +7,9 @@ const MIME_TYPES = {
   'image/jpeg': 'jpg',
   'image/png': 'png'
 };
+/*
+Iphone_13_pro_1.jpg1642625190972.jpg 
+Iphone_13_pro_1.jpg1642625190972.jpg*/
 
 //Configuration du chemin et nom de fichier
 const storage = multer.diskStorage({

@@ -1,9 +1,5 @@
 //Importation d'Express
 const express = require('express');
-const bodyParser = require('body-parser');
-
-//Importation de Mongoose
-const mongoose = require('mongoose');
 
 //Importation d'helmet
 const helmet = require('helmet');
@@ -19,23 +15,33 @@ const path = require('path');
 const sauceRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
 
+//Création d'une application express
+const app = express();
+
+//Appel d'helmet
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    // ...
+  })
+);
+
+//Importation de Mongoose
+const mongoose = require('mongoose'); 
+
 mongoose.connect(process.env.MONGO,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-//Création d'une application express
-const app = express();
-
-//Appel d'helmet
-app.use(helmet());
 
 //Middleware pour résoudre les problemes de CORS 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-site')
   next();
 });
 
